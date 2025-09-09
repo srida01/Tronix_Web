@@ -25,7 +25,7 @@ function Timeline(){
         focal={[0.5, 0.5]}
         rotation={[1.0, 0.0]}
         starSpeed={0.5}
-        density={1.5}
+        density={2}
         hueShift={140}
         disableAnimation={false}
         speed={1}
@@ -33,10 +33,10 @@ function Timeline(){
         mouseRepulsion={true}
         rotationSpeed={0.1}
         glowIntensity={0.4}
-        saturation={0.0}
+        saturation={5}
         repulsionStrength={4}
         autoCenterRepulsion={0}
-        twinkleIntensity={0.3}
+        twinkleIntensity={1}
         transparent={true}
         className="absolute top-0 left-0 w-full h-full"
       />
@@ -85,7 +85,11 @@ function Timeline(){
           {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
-            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal</p>
+            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal
+              NH 66, Srinivasnagar
+              Surathkal, Mangalore
+              Karnataka 575025
+            </p>
           </div>
 
           {/* Social Links */}
@@ -97,7 +101,7 @@ function Timeline(){
               className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
             >
               <Instagram size={20} />
-              <span className="font-electrolize">@Tronix_NITK</span>
+              <span className="font-electrolize"></span>
             </a>
             <a
               href="https://www.linkedin.com/company/tronix-nitk/"
@@ -106,7 +110,7 @@ function Timeline(){
               className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
             >
               <Linkedin size={20} />
-              <span className="font-electrolize">/Tronix_NITK</span>
+              <span className="font-electrolize"></span>
             </a>
           </div>
         </div>

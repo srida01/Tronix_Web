@@ -63,7 +63,8 @@ function UserEvents() {
         focal={[0.5, 0.5]}
         rotation={[1.0, 0.0]}
         starSpeed={0.5}
-        density={1.5}
+        density={2}
+        saturation={5}
         hueShift={140}
         disableAnimation={false}
         className="absolute top-0 left-0 w-full h-full"
@@ -198,6 +199,9 @@ function UserEvents() {
             </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
               NITK Surathkal
+              NH 66, Srinivasnagar
+              Surathkal, Mangalore
+              Karnataka 575025
             </p>
           </div>
           <div className="flex space-x-6">
@@ -208,7 +212,7 @@ function UserEvents() {
               className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
             >
               <Instagram size={20} />
-              <span className="font-electrolize">@Tronix_NITK</span>
+              <span className="font-electrolize"></span>
             </a>
             <a
               href="https://www.linkedin.com/company/tronix-nitk/"
@@ -217,7 +221,7 @@ function UserEvents() {
               className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
             >
               <Linkedin size={20} />
-              <span className="font-electrolize">/Tronix_NITK</span>
+              <span className="font-electrolize"></span>
             </a>
           </div>
         </div>

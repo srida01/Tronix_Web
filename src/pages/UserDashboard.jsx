@@ -31,14 +31,14 @@ function UserDashboard() {
   focal={[0.5, 0.5]}
   rotation={[1.0, 0.0]}
   starSpeed={0.5}
-  density={1.5}
+  density={2}
   hueShift={140}
   speed={1}
   mouseInteraction={false}
   mouseRepulsion={false}
   rotationSpeed={0.1}
   glowIntensity={0.4}
-  saturation={2.0}
+  saturation={5}
   repulsionStrength={4}
   autoCenterRepulsion={0}
   twinkleIntensity={0.6}
@@ -159,7 +159,11 @@ function UserDashboard() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
-            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal</p>
+            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal
+              NH 66, Srinivasnagar
+              Surathkal, Mangalore
+              Karnataka 575025
+            </p>
           </div>
           <div className="flex space-x-6">
             <a
@@ -169,7 +173,7 @@ function UserDashboard() {
               className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
             >
               <Instagram size={20} />
-              <span className="font-electrolize">@Tronix_NITK</span>
+              <span className="font-electrolize"></span>
             </a>
             <a
               href="https://www.linkedin.com/company/tronix-nitk/"
@@ -178,7 +182,7 @@ function UserDashboard() {
               className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
             >
               <Linkedin size={20} />
-              <span className="font-electrolize">/Tronix_NITK</span>
+              <span className="font-electrolize"></span>
             </a>
           </div>
         </div>

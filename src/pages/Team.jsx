@@ -72,7 +72,7 @@ function Team() {
         focal={[0.5, 0.5]}
         rotation={[1.0, 0.0]}
         starSpeed={0.5}
-        density={1.5}
+        density={2}
         hueShift={140}
         disableAnimation={false}
         speed={1}
@@ -80,10 +80,10 @@ function Team() {
         mouseRepulsion={true}
         rotationSpeed={0.1}
         glowIntensity={0.4}
-        saturation={0.0}
+        saturation={5}
         repulsionStrength={4}
         autoCenterRepulsion={0}
-        twinkleIntensity={0.3}
+        twinkleIntensity={0.6}
         transparent={true}
         className="absolute top-0 left-0 w-full h-full"
       />

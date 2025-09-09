@@ -2,35 +2,37 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "@clerk/clerk-react"; // ✅ Import useUser
+import { useUser } from "@clerk/clerk-react";
 import logo from "../images/Tronix_Logo.jpg";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { isSignedIn } = useUser(); // ✅ Get user's signed-in status
+  const { isSignedIn } = useUser();
 
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Events", path: "/events" },
     { name: "Timeline", path: "/timeline" },
     { name: "Gallery", path: "/gallery" },
-    { name: "Team", path: "/team" }, 
+    { name: "Team", path: "/team" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-black/70 backdrop-blur-md z-50 shadow-md">
       <div className="container mx-auto flex justify-between items-center px-6 py-4">
-        {/* Logo */}
+        {/* Logo with Gradient Border (No Rotation) */}
         <div
           className="flex items-center space-x-3 cursor-pointer"
           onClick={() => navigate("/")}
         >
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full shadow-lg border-2 border-cyan-400 hover:scale-110 transition"
-          />
+          <div className="p-[3px] rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-lg">
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full border-2 border-transparent hover:scale-110 transition"
+            />
+          </div>
         </div>
 
         {/* Desktop Menu */}
@@ -90,7 +92,6 @@ function Navbar() {
                 </button>
               ))}
 
-              {/* Dynamic Registration/Dashboard Button for Mobile */}
               <button
                 onClick={() => {
                   navigate(isSignedIn ? "/dashboard" : "/register");

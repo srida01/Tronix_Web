@@ -1,8 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Electrolize&display=swap');
 @import "tailwindcss";
+
+html, body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --font-orbitron: 'Orbitron', sans-serif;
   --font-electrolize: 'Electrolize', sans-serif;
+}
+#hero, 
+section, 
+footer, 
+.GalaxyCanvas {
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
 }
 
 .font-orbitron {
