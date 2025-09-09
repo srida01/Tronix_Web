@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Electrolize&display=swap');
+@import "tailwindcss";
+:root {
+  --font-orbitron: 'Orbitron', sans-serif;
+  --font-electrolize: 'Electrolize', sans-serif;
+}
+
+.font-orbitron {
+  font-family: var(--font-orbitron);
+}
+
+.font-electrolize {
+  font-family: var(--font-electrolize);
+}
+
+
+.flowing-text {
+  background: linear-gradient(
+    270deg,
+    #06b6d4, /* cyan */
+    #9333ea, /* purple */
+    #ec4899, /* pink */
+    #f43f5e, /* rose */
+    #3b82f6  /* blue */
+  );
+  background-size: 600% 600%;
+  
+  /* Add both standard and WebKit versions */
+  background-clip: text;
+  -webkit-background-clip: text;
+  
+  /* Transparent text for gradient effect */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  animation: flowingGradient 8s ease infinite;
+}
+
+@keyframes flowingGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.clip-path-polygon {
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
