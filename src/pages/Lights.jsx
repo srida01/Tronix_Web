@@ -1,4 +1,4 @@
-// src/pages/events/BallBalancer.jsx
+// src/pages/events/Light.jsx
 import Galaxy from "../Components/Galaxy";
 import { Instagram, Linkedin, Menu, X } from "lucide-react";
 import React, { useState } from "react";
@@ -6,18 +6,96 @@ import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../images/Tronix_Logo.jpg";
+import { supabase } from "../utilities/Supabase";
 
 function Light() {
   const { user } = useUser();
   const { signOut } = useClerk();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navItems = [{ name: "Dashboard", path: "/dashboard" }];
 
   const handleLogout = async () => {
     await signOut();
     navigate("/register");
+  };
+
+  // Form state
+  const [formData, setFormData] = useState({
+    teamName: "",
+    leaderName: "",
+    leaderEmail: "",
+    member1Name: "",
+    member1Email: "",
+    member2Name: "",
+    member2Email: "",
+    member3Name: "",
+    member3Email: "",
+    phone: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrorMessage(""); // clear on input
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { error } = await supabase.from("Light").insert([
+      {
+        Team: formData.teamName,
+        Leader: formData.leaderName,
+        LeaderE: formData.leaderEmail,
+        M1: formData.member1Name,
+        E1: formData.member1Email,
+        M2: formData.member2Name,
+        E2: formData.member2Email,
+        M3: formData.member3Name,
+        E3: formData.member3Email,
+        Phone: formData.phone,
+        Attendance: false,
+      },
+    ]);
+
+    if (error) {
+      if (error.message.includes("duplicate key value")) {
+        if (error.message.includes("Light_Team_key")) {
+          setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
+        } else if (
+          error.message.includes("Light_LeaderE_key") ||
+          error.message.includes("Light_E1_key") ||
+          error.message.includes("Light_E2_key") ||
+          error.message.includes("Light_E3_key")
+        ) {
+          setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
+        } else if (error.message.includes("Light_Phone_key")) {
+          setErrorMessage("⚠️ This phone number is already registered. Please use a different phone number.");
+        } else {
+          setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
+        }
+      } else {
+        setErrorMessage("❌ Error submitting form: " + error.message);
+      }
+      console.log(error);
+    } else {
+      alert("✅ Registration successful!");
+      setFormData({
+        teamName: "",
+        leaderName: "",
+        leaderEmail: "",
+        member1Name: "",
+        member1Email: "",
+        member2Name: "",
+        member2Email: "",
+        member3Name: "",
+        member3Email: "",
+        phone: "",
+      });
+      setErrorMessage("");
+    }
   };
 
   return (
@@ -36,7 +114,6 @@ function Light() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-black/70 backdrop-blur-md z-50 shadow-md">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
-          {/* User Info */}
           <div className="flex items-center space-x-3">
             <img
               src={user?.profileImageUrl || logo}
@@ -48,7 +125,6 @@ function Light() {
             </span>
           </div>
 
-          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <button
@@ -67,7 +143,6 @@ function Light() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="lg:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-white">
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -75,7 +150,6 @@ function Light() {
           </div>
         </div>
 
-        {/* Mobile Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -115,53 +189,29 @@ function Light() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pt-32 px-6 z-10 relative">
-        {/* Event Title */}
         <h1 className="font-orbitron text-4xl font-bold mb-6 text-cyan-400">
-          Lights And Lasers
+          Lights and Lasers
         </h1>
 
-        {/* Event Image */}
-        <img
-          src="https://source.unsplash.com/1000x400/?robotics,technology"
-          alt="Lights And Lasers"
-          className="rounded-2xl shadow-lg mb-8 w-full max-w-5xl"
-        />
-
-        {/* Event Info */}
-        <div className="bg-gradient-to-r from-cyan-700/60 to-purple-800/60 p-8 rounded-2xl shadow-lg w-full max-w-4xl mb-12 text-center">
-          <h2 className="font-orbitron text-2xl font-semibold mb-4">Event Details</h2>
-          <p className="font-electrolize text-gray-300 mb-2">
-            <strong>Time:</strong> 10:00 AM - 11:30 AM
-          </p>
-          <p className="font-electrolize text-gray-300 mb-2">
-            <strong>Venue:</strong> Main Auditorium
-          </p>
-          <p className="font-electrolize text-gray-300">
-            In Ball Balancer, teams must design a mechanism to balance a rolling
-            ball on a dynamic platform using precision, sensors, and control
-            systems. The goal is to keep the ball balanced for the longest
-            duration without letting it drop.
-          </p>
-        </div>
-
-        {/* Registration Form */}
         <div className="bg-gradient-to-r from-purple-700/60 to-cyan-800/60 p-8 rounded-2xl shadow-lg w-full max-w-4xl mb-16">
           <h2 className="font-orbitron text-2xl font-semibold mb-6 text-center">
             Team Registration
           </h2>
-          <form className="grid grid-cols-1 gap-6">
-            {/* Team Name */}
+
+          <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
             <div>
               <label className="block font-electrolize mb-2">Team Name</label>
               <input
                 type="text"
+                name="teamName"
+                value={formData.teamName}
+                onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
             </div>
 
-            {/* Team Members */}
-            {[1, 2, 3, 4].map((num) => (
+            {[1, 2, 3].map((num) => (
               <div key={num} className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block font-electrolize mb-2">
@@ -169,6 +219,9 @@ function Light() {
                   </label>
                   <input
                     type="text"
+                    name={`member${num}Name`}
+                    value={formData[`member${num}Name`]}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                     required
                   />
@@ -179,6 +232,9 @@ function Light() {
                   </label>
                   <input
                     type="email"
+                    name={`member${num}Email`}
+                    value={formData[`member${num}Email`]}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                     required
                   />
@@ -186,19 +242,48 @@ function Light() {
               </div>
             ))}
 
-            {/* Team Leader Phone */}
             <div>
-              <label className="block font-electrolize mb-2">
-                Team Leader Phone Number
-              </label>
+              <label className="block font-electrolize mb-2">Leader Name</label>
               <input
-                type="tel"
+                type="text"
+                name="leaderName"
+                value={formData.leaderName}
+                onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
             </div>
 
-            {/* Submit */}
+            <div>
+              <label className="block font-electrolize mb-2">Leader Email</label>
+              <input
+                type="email"
+                name="leaderEmail"
+                value={formData.leaderEmail}
+                onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block font-electrolize mb-2">Team Leader Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                required
+              />
+            </div>
+
+            {errorMessage && (
+              <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium animate-pulse">
+                {errorMessage}
+              </div>
+            )}
+
             <button
               type="submit"
               className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-110 transition-transform duration-300"
@@ -209,17 +294,18 @@ function Light() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left mt-auto">
+      <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
-            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal
+            <p className="font-electrolize text-gray-300 text-sm mt-1">
+              NITK Surathkal
               NH 66, Srinivasnagar
               Surathkal, Mangalore
               Karnataka 575025
             </p>
           </div>
+
           <div className="flex space-x-6">
             <a
               href="https://www.instagram.com/tronixnitk"
@@ -228,7 +314,6 @@ function Light() {
               className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
             >
               <Instagram size={20} />
-              <span className="font-electrolize"></span>
             </a>
             <a
               href="https://www.linkedin.com/company/tronix-nitk/"
@@ -237,10 +322,10 @@ function Light() {
               className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
             >
               <Linkedin size={20} />
-              <span className="font-electrolize"></span>
             </a>
           </div>
         </div>
+
         <p className="text-gray-500 text-xs mt-6 font-electrolize">
           © {new Date().getFullYear()} TRONIX. All Rights Reserved.
         </p>

@@ -6,7 +6,6 @@ import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../images/Tronix_Logo.jpg";
-import { supabase } from "../utilities/Supabase";
 
 function Foxhunt() {
   const { user } = useUser();
@@ -38,67 +37,17 @@ function Foxhunt() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrorMessage(""); // Clear warning on change
+    setErrorMessage(""); // clear warning on change
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("FoxHunt").insert([
-      {
-        Team: formData.teamName,
-        Leader: formData.leaderName,
-        LeaderE: formData.leaderEmail,
-        Mem1: formData.member1Name,
-        E1: formData.member1Email,
-        Mem2: formData.member2Name,
-        E2: formData.member2Email,
-        Mem3: formData.member3Name,
-        E3: formData.member3Email,
-        Leadernumber: formData.phone,
-        Attendance: false, // default
-      },
-    ]);
+    // Save form data locally before redirect
+    localStorage.setItem("foxhuntFormData", JSON.stringify(formData));
 
-    if (error) {
-      // Check for unique constraint violation
-      if (error.message.includes("duplicate key value")) {
-        if (error.message.includes("Foxhunt_Team_key")) {
-          setErrorMessage(
-            "⚠️ This team name is already registered. Please choose a different name."
-          );
-        } else if (
-          error.message.includes("Foxhunt_LeaderE_key") ||
-          error.message.includes("Foxhunt_E1_key") ||
-          error.message.includes("Foxhunt_E2_key") ||
-          error.message.includes("Foxhunt_E3_key")
-        ) {
-          setErrorMessage(
-            "⚠️ One of the emails you entered is already registered. Please use a different email."
-          );
-        } else {
-          setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
-        }
-      } else {
-        setErrorMessage("❌ Error submitting form: " + error.message);
-      }
-      console.log(error);
-    } else {
-      alert("✅ Registration successful!");
-      setFormData({
-        teamName: "",
-        leaderName: "",
-        leaderEmail: "",
-        member1Name: "",
-        member1Email: "",
-        member2Name: "",
-        member2Email: "",
-        member3Name: "",
-        member3Email: "",
-        phone: "",
-      });
-      setErrorMessage("");
-    }
+    // Redirect to Instamojo payment link (replace with your own link)
+    window.location.href = "https://imjo.in/9VmsQE";
   };
 
   return (
@@ -220,7 +169,7 @@ function Foxhunt() {
               />
             </div>
 
-            {/* Team Members */}
+            {/* Members */}
             {[1, 2, 3].map((num) => (
               <div key={num} className="grid grid-cols-2 gap-4">
                 <div>
@@ -252,7 +201,7 @@ function Foxhunt() {
               </div>
             ))}
 
-            {/* Team Leader */}
+            {/* Leader */}
             <div>
               <label className="block font-electrolize mb-2">Leader Name</label>
               <input
@@ -276,7 +225,7 @@ function Foxhunt() {
               />
             </div>
 
-            {/* Team Leader Phone */}
+            {/* Phone */}
             <div>
               <label className="block font-electrolize mb-2">
                 Team Leader Phone Number
@@ -293,7 +242,7 @@ function Foxhunt() {
 
             {/* Error Message */}
             {errorMessage && (
-              <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium animate-pulse">
+              <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium">
                 {errorMessage}
               </div>
             )}
@@ -303,7 +252,7 @@ function Foxhunt() {
               type="submit"
               className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-110 transition-transform duration-300"
             >
-              Submit Registration
+              Proceed to Payment
             </button>
           </form>
         </div>
@@ -312,7 +261,6 @@ function Foxhunt() {
       {/* Footer */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
-          {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
               Contact Us
@@ -325,7 +273,6 @@ function Foxhunt() {
             </p>
           </div>
 
-          {/* Social Links */}
           <div className="flex space-x-6">
             <a
               href="https://www.instagram.com/tronixnitk"

@@ -15,7 +15,6 @@ function UserDashboard() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Timeline", path: "/timeline" },
     { name: "Team", path: "/team" },
   ];
 
@@ -146,10 +145,10 @@ function UserDashboard() {
             Events
           </div>
           <div
-            onClick={() => navigate("/events-registered")}
+            onClick={() => navigate("/timeline")}
             className="cursor-pointer bg-gradient-to-r from-pink-700/60 to-purple-700/60 p-12 rounded-3xl flex items-center justify-center font-orbitron text-2xl md:text-4xl font-bold text-white shadow-xl hover:scale-105 transition-transform duration-300 text-center"
           >
-            Events Registered
+            Timeline
           </div>
         </div>
       </div>

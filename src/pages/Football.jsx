@@ -60,41 +60,44 @@ function Football() {
       },
     ]);
 
-    if (error) {
-      // Check for unique constraint violation
-      if (error.message.includes("duplicate key value")) {
-        if (error.message.includes("Football_Team_key")) {
-          setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
-        } else if (
-          error.message.includes("Football_LeaderE_key") ||
-          error.message.includes("Football_E1_key") ||
-          error.message.includes("Football_E2_key") ||
-          error.message.includes("Football_E3_key")
-        ) {
-          setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
-        } else {
-          setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
-        }
-      } else {
-        setErrorMessage("❌ Error submitting form: " + error.message);
-      }
-      console.log(error);
+if (error) {
+  // Check for unique constraint violation
+  if (error.message.includes("duplicate key value")) {
+    if (error.message.includes("Football_Team_key")) {
+      setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
+    } else if (
+      error.message.includes("Football_LeaderE_key") ||
+      error.message.includes("Football_E1_key") ||
+      error.message.includes("Football_E2_key") ||
+      error.message.includes("Football_E3_key")
+    ) {
+      setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
+    } else if (error.message.includes("Football_Phone_key")) {
+      setErrorMessage("⚠️ This phone number is already registered. Please use a different phone number.");
     } else {
-      alert("✅ Registration successful!");
-      setFormData({
-        teamName: "",
-        leaderName: "",
-        leaderEmail: "",
-        member1Name: "",
-        member1Email: "",
-        member2Name: "",
-        member2Email: "",
-        member3Name: "",
-        member3Email: "",
-        phone: "",
-      });
-      setErrorMessage("");
+      setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
     }
+  } else {
+    setErrorMessage("❌ Error submitting form: " + error.message);
+  }
+  console.log(error);
+} else {
+  alert("✅ Registration successful!");
+  setFormData({
+    teamName: "",
+    leaderName: "",
+    leaderEmail: "",
+    member1Name: "",
+    member1Email: "",
+    member2Name: "",
+    member2Email: "",
+    member3Name: "",
+    member3Email: "",
+    phone: "",
+  });
+  setErrorMessage("");
+}
+
   };
 
   return (
