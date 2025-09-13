@@ -5,7 +5,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import App from "./App";
 import "./index.css";
 
-const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const clerkPublishableKey = "pk_test_Z3VpZGluZy1qYWNrYWwtMjcuY2xlcmsuYWNjb3VudHMuZGV2JA";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={clerkPublishableKey}>
