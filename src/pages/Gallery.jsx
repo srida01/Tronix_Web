@@ -50,7 +50,7 @@ function Gallery() {
       {/* Gallery Section */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
         <h1 className="text-6xl md:text-7xl font-orbitron font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 text-center drop-shadow-[0_0_35px_rgba(59,130,246,0.9)] mb-16">
-          Last Year's Event Gallery
+          Gallery
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
