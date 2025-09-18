@@ -7,7 +7,7 @@ import { Instagram, Linkedin } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 
-function Home() {
+function About() {
   const navigate = useNavigate();
   const { isSignedIn } = useUser();
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -46,42 +46,55 @@ function Home() {
 
       <Navbar />
 
-      {/* Hero Section */}
-      <div
-        id="hero"
-        className="relative z-10 flex flex-col items-center justify-center h-screen space-y-6 text-center px-4"
-      >
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="font-orbitron text-6xl md:text-8xl font-extrabold tracking-widest 
-                     text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500
-                     drop-shadow-[0_0_35px_rgba(59,130,246,0.9)]"
+      {/* About Us Section */}
+      <section className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center px-6 py-16 md:px-10 md:py-20 gap-10 md:gap-16">
+        {/* Logo / Left Side */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="flex-shrink-0"
         >
-          TRONIX
-        </motion.h1>
-
-        <div className="flex flex-col md:flex-row gap-4">
-          <button
-            onClick={() => navigate(isSignedIn ? "/dashboard" : "/register")}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg 
-            hover:scale-105 hover:shadow-pink-500/50 transition-all duration-300"
+          <motion.div
+            animate={{ rotate: [0, 360] }}
+            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+            className="relative p-[3px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-400 
+                       shadow-[0_0_40px_rgba(236,72,153,0.8)] 
+                       animate-border-gradient"
           >
-            {isSignedIn ? "Go To Dashboard" : "Registration"}
-          </button>
+            <motion.img
+              src={logo}
+              alt="Logo"
+              className="w-32 md:w-48 rounded-full border-4 border-transparent"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+            />
+          </motion.div>
+        </motion.div>
 
-          {!isSignedIn && <button
-            onClick={() => navigate("/events")}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg 
-            hover:scale-105 hover:shadow-pink-500/50 transition-all duration-300"
-          >
-            Events
-          </button>}
-        </div>
-
-      </div>
-
+        {/* About Us Box / Right Side */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+          className="relative max-w-lg p-[2px] rounded-[2.5rem] bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 shadow-[0_0_50px_rgba(236,72,153,0.5)]"
+        >
+          <div className="bg-black/70 backdrop-blur-lg rounded-[2.5rem] p-6 md:p-10">
+            <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4 flowing-text text-center md:text-left">
+              About Us
+            </h2>
+            <p className="font-electrolize text-base md:text-lg leading-relaxed text-gray-200 text-center md:text-left">
+              <span className="text-cyan-400 font-semibold">TRONIX</span> is a
+              hub of <span className="text-purple-400">innovation</span> and{" "}
+              <span className="text-pink-400">creativity</span>. We connect
+              brilliant minds to explore tech, craft futuristic solutions, and
+              empower the next generation of innovators.
+            </p>
+          </div>
+        </motion.div>
+      </section>
 
       {/* Footer Section */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
@@ -129,4 +142,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default About;

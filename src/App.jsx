@@ -13,6 +13,7 @@ import Football from "./pages/Football";
 import Foxhunt from "./pages/Foxhunt";
 import Trade from "./pages/Trade";
 import Light from "./pages/Lights"
+import About from "./pages/About";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/about" element={<About />} />
 
         {/* Clerk auth pages */}
         <Route path="/register/*" element={<UserRegister />} />
