@@ -3,17 +3,24 @@ import React from "react";
 import Galaxy from "../Components/Galaxy";
 import Navbar from "../Components/Navbar";
 import { Instagram, Linkedin } from "lucide-react";
-
+import img1 from "../images/20191018_141759.jpg";
+import img2 from "../images/20191018_150221.jpg";
+import img3 from "../images/20191019_151740.jpg";
+import img4 from "../images/20191019_222501.jpg";
+import img5 from "../images/20191020_154803.jpg";
+import img6 from "../images/IMG_20191019_153820.jpg";
+import img7 from "../images/IMG_20191019_182729.jpg";
+import img8 from "../images/IMG_20191020_180943.jpg";
 // Replace these URLs with your actual event images
 const galleryImages = [
-  "https://source.unsplash.com/800x600/?technology,event",
-  "https://source.unsplash.com/800x600/?robotics,event",
-  "https://source.unsplash.com/800x600/?coding,event",
-  "https://source.unsplash.com/800x600/?workshop,event",
-  "https://source.unsplash.com/800x600/?students,event",
-  "https://source.unsplash.com/800x600/?competition,event",
-  "https://source.unsplash.com/800x600/?science,event",
-  "https://source.unsplash.com/800x600/?innovation,event",
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
 ];
 
 function Gallery() {
