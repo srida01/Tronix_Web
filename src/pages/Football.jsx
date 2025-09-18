@@ -1,7 +1,7 @@
-// src/pages/events/BallBalancer.jsx
+// src/pages/events/Football.jsx
 import Galaxy from "../Components/Galaxy";
 import { Instagram, Linkedin, Menu, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,6 +14,9 @@ function Football() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [file, setFile] = useState(null);
+
+  const fileInputRef = useRef(null); // for resetting file input
 
   const navItems = [{ name: "Dashboard", path: "/dashboard" }];
 
@@ -38,66 +41,98 @@ function Football() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrorMessage(""); // Clear warning on change
+    setErrorMessage("");
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("Football").insert([
-      {
-        Team: formData.teamName,
-        Leader: formData.leaderName,
-        LeaderE: formData.leaderEmail,
-        M1: formData.member1Name,
-        E1: formData.member1Email,
-        M2: formData.member2Name,
-        E2: formData.member2Email,
-        M3: formData.member3Name,
-        E3: formData.member3Email,
-        Phone: formData.phone,
-        Attendance: false,
-      },
-    ]);
+    let imageUrl = null;
 
-if (error) {
-  // Check for unique constraint violation
-  if (error.message.includes("duplicate key value")) {
-    if (error.message.includes("Football_Team_key")) {
-      setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
-    } else if (
-      error.message.includes("Football_LeaderE_key") ||
-      error.message.includes("Football_E1_key") ||
-      error.message.includes("Football_E2_key") ||
-      error.message.includes("Football_E3_key")
-    ) {
-      setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
-    } else if (error.message.includes("Football_Phone_key")) {
-      setErrorMessage("⚠️ This phone number is already registered. Please use a different phone number.");
-    } else {
-      setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
+    try {
+      if (file) {
+        const fileName = `${formData.teamName}_${Date.now()}_${file.name}`;
+        const { error: uploadError } = await supabase.storage
+          .from("Football_files")
+          .upload(fileName, file);
+
+        if (uploadError) {
+          setErrorMessage("❌ File upload failed: " + uploadError.message);
+          return;
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from("Football_files")
+          .getPublicUrl(fileName);
+
+        imageUrl = publicUrlData.publicUrl;
+      }
+
+      const { error } = await supabase.from("Football").insert([
+        {
+          Team: formData.teamName,
+          Leader: formData.leaderName,
+          LeaderE: formData.leaderEmail,
+          Mem1: formData.member1Name,
+          E1: formData.member1Email,
+          Mem2: formData.member2Name,
+          E2: formData.member2Email,
+          Mem3: formData.member3Name,
+          E3: formData.member3Email,
+          Phone: formData.phone,
+          Attendance: false,
+          image_url: imageUrl,
+        },
+      ]);
+
+      if (error) {
+        if (error.message.includes("duplicate key value")) {
+          if (error.message.includes("Football_Team_key")) {
+            setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
+          } else if (
+            error.message.includes("Football_LeaderE_key") ||
+            error.message.includes("Football_E1_key") ||
+            error.message.includes("Football_E2_key") ||
+            error.message.includes("Football_E3_key")
+          ) {
+            setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
+          } else if (error.message.includes("Football_Phone_key")) {
+            setErrorMessage("⚠️ This phone number is already registered. Please use a different phone number.");
+          } else {
+            setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
+          }
+        } else {
+          setErrorMessage("❌ Error submitting form: " + error.message);
+        }
+        console.log(error);
+      } else {
+        alert("✅ Registration successful!");
+        setFormData({
+          teamName: "",
+          leaderName: "",
+          leaderEmail: "",
+          member1Name: "",
+          member1Email: "",
+          member2Name: "",
+          member2Email: "",
+          member3Name: "",
+          member3Email: "",
+          phone: "",
+        });
+        setFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = ""; // clear file input
+        }
+        setErrorMessage("");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("❌ Unexpected error: " + err.message);
     }
-  } else {
-    setErrorMessage("❌ Error submitting form: " + error.message);
-  }
-  console.log(error);
-} else {
-  alert("✅ Registration successful!");
-  setFormData({
-    teamName: "",
-    leaderName: "",
-    leaderEmail: "",
-    member1Name: "",
-    member1Email: "",
-    member2Name: "",
-    member2Email: "",
-    member3Name: "",
-    member3Email: "",
-    phone: "",
-  });
-  setErrorMessage("");
-}
-
   };
 
   return (
@@ -116,7 +151,6 @@ if (error) {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-black/70 backdrop-blur-md z-50 shadow-md">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
-          {/* User Info */}
           <div className="flex items-center space-x-3">
             <img
               src={user?.profileImageUrl || logo}
@@ -128,7 +162,6 @@ if (error) {
             </span>
           </div>
 
-          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <button
@@ -147,7 +180,6 @@ if (error) {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="lg:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-white">
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -155,7 +187,6 @@ if (error) {
           </div>
         </div>
 
-        {/* Mobile Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -290,6 +321,34 @@ if (error) {
               />
             </div>
 
+            {/* QR Code for Payment */}
+            <div className="flex flex-col items-center mb-6">
+              <img
+                src="/images/payment_qr.png"
+                alt="Payment QR Code"
+                className="w-48 h-48 object-contain mb-4 border-2 border-cyan-400 rounded-lg shadow-lg"
+              />
+              <p className="text-gray-300 text-sm font-electrolize">
+                Scan the QR code to make the payment and upload the receipt below
+              </p>
+            </div>
+
+            {/* File Upload */}
+            <div className="mb-6">
+              <label className="block font-electrolize mb-2">
+                Upload Payment Receipt
+              </label>
+              <input
+                type="file"
+                name="paymentProof"
+                accept="image/*,application/pdf"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                required
+              />
+            </div>
+
             {/* Error Message */}
             {errorMessage && (
               <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium animate-pulse">
@@ -300,7 +359,7 @@ if (error) {
             {/* Submit */}
             <button
               type="submit"
-              className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-110 transition-transform duration-300"
+              className="mt-2 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-110 transition-transform duration-300"
             >
               Submit Registration
             </button>
@@ -311,7 +370,6 @@ if (error) {
       {/* Footer */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
-          {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
               Contact Us
@@ -324,7 +382,6 @@ if (error) {
             </p>
           </div>
 
-          {/* Social Links */}
           <div className="flex space-x-6">
             <a
               href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
@@ -333,7 +390,6 @@ if (error) {
               className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
             >
               <Instagram size={20} />
-              <span className="font-electrolize"></span>
             </a>
             <a
               href="https://www.linkedin.com/company/tronix-nitk/"
@@ -342,12 +398,10 @@ if (error) {
               className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
             >
               <Linkedin size={20} />
-              <span className="font-electrolize"></span>
             </a>
           </div>
         </div>
 
-        {/* Copyright */}
         <p className="text-gray-500 text-xs mt-6 font-electrolize">
           © {new Date().getFullYear()} TRONIX. All Rights Reserved.
         </p>

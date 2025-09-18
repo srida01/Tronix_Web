@@ -1,7 +1,7 @@
 // src/pages/events/Light.jsx
 import Galaxy from "../Components/Galaxy";
 import { Instagram, Linkedin, Menu, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,6 +14,8 @@ function Light() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const navItems = [{ name: "Dashboard", path: "/dashboard" }];
 
@@ -22,7 +24,6 @@ function Light() {
     navigate("/register");
   };
 
-  // Form state
   const [formData, setFormData] = useState({
     teamName: "",
     leaderName: "",
@@ -38,63 +39,81 @@ function Light() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrorMessage(""); // clear on input
+    setErrorMessage("");
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("Light").insert([
-      {
-        Team: formData.teamName,
-        Leader: formData.leaderName,
-        LeaderE: formData.leaderEmail,
-        M1: formData.member1Name,
-        E1: formData.member1Email,
-        M2: formData.member2Name,
-        E2: formData.member2Email,
-        M3: formData.member3Name,
-        E3: formData.member3Email,
-        Phone: formData.phone,
-        Attendance: false,
-      },
-    ]);
+    if (!file) {
+      setErrorMessage("❌ Please upload the payment receipt.");
+      return;
+    }
 
-    if (error) {
-      if (error.message.includes("duplicate key value")) {
-        if (error.message.includes("Light_Team_key")) {
-          setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
-        } else if (
-          error.message.includes("Light_LeaderE_key") ||
-          error.message.includes("Light_E1_key") ||
-          error.message.includes("Light_E2_key") ||
-          error.message.includes("Light_E3_key")
-        ) {
-          setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
-        } else if (error.message.includes("Light_Phone_key")) {
-          setErrorMessage("⚠️ This phone number is already registered. Please use a different phone number.");
-        } else {
-          setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
-        }
-      } else {
-        setErrorMessage("❌ Error submitting form: " + error.message);
+    let imageUrl = null;
+
+    try {
+      const fileName = `${formData.teamName}_${Date.now()}_${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from("Lights_files")
+        .upload(fileName, file);
+
+      if (uploadError) {
+        setErrorMessage("❌ File upload failed: " + uploadError.message);
+        return;
       }
-      console.log(error);
-    } else {
-      alert("✅ Registration successful!");
-      setFormData({
-        teamName: "",
-        leaderName: "",
-        leaderEmail: "",
-        member1Name: "",
-        member1Email: "",
-        member2Name: "",
-        member2Email: "",
-        member3Name: "",
-        member3Email: "",
-        phone: "",
-      });
-      setErrorMessage("");
+
+      const { data: publicUrlData } = supabase.storage
+        .from("Lights_files")
+        .getPublicUrl(fileName);
+
+      imageUrl = publicUrlData.publicUrl;
+
+      const { error } = await supabase.from("Lights").insert([
+        {
+          Team: formData.teamName,
+          Leader: formData.leaderName,
+          LeaderE: formData.leaderEmail,
+          Mem1: formData.member1Name,
+          E1: formData.member1Email,
+          Mem2: formData.member2Name,
+          E2: formData.member2Email,
+          Mem3: formData.member3Name,
+          E3: formData.member3Email,
+          Phone: formData.phone,
+          Attendance: false,
+          image_url: imageUrl,
+        },
+      ]);
+
+      if (error) {
+        setErrorMessage("❌ Error submitting form: " + error.message);
+        console.log(error);
+      } else {
+        alert("✅ Registration successful!");
+        setFormData({
+          teamName: "",
+          leaderName: "",
+          leaderEmail: "",
+          member1Name: "",
+          member1Email: "",
+          member2Name: "",
+          member2Email: "",
+          member3Name: "",
+          member3Email: "",
+          phone: "",
+        });
+        setFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        setErrorMessage("");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("❌ Unexpected error: " + err.message);
     }
   };
 
@@ -267,12 +286,42 @@ function Light() {
             </div>
 
             <div>
-              <label className="block font-electrolize mb-2">Team Leader Phone Number</label>
+              <label className="block font-electrolize mb-2">
+                Team Leader Phone Number
+              </label>
               <input
                 type="tel"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
+                className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                required
+              />
+            </div>
+
+            {/* QR Code */}
+            <div className="flex flex-col items-center mb-6">
+              <img
+                src="/images/payment_qr.png"
+                alt="Payment QR Code"
+                className="w-48 h-48 object-contain mb-4 border-2 border-cyan-400 rounded-lg shadow-lg"
+              />
+              <p className="text-gray-300 text-sm font-electrolize">
+                Scan the QR code to make the payment and upload the receipt below
+              </p>
+            </div>
+
+            {/* File Upload */}
+            <div className="mb-6">
+              <label className="block font-electrolize mb-2">
+                Upload Payment Receipt
+              </label>
+              <input
+                type="file"
+                name="paymentProof"
+                accept="image/*,application/pdf"
+                onChange={handleFileChange}
+                ref={fileInputRef}
                 className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
@@ -294,10 +343,13 @@ function Light() {
         </div>
       </div>
 
+      {/* Footer */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           <div>
-            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
+            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
+              Contact Us
+            </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
               NITK Surathkal
               NH 66, Srinivasnagar

@@ -1,11 +1,12 @@
 // src/pages/events/Foxhunt.jsx
 import Galaxy from "../Components/Galaxy";
 import { Instagram, Linkedin, Menu, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../images/Tronix_Logo.jpg";
+import { supabase } from "../utilities/Supabase"; // Make sure this is correctly initialized
 
 function Foxhunt() {
   const { user } = useUser();
@@ -13,6 +14,8 @@ function Foxhunt() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const navItems = [{ name: "Dashboard", path: "/dashboard" }];
 
@@ -37,17 +40,86 @@ function Foxhunt() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrorMessage(""); // clear warning on change
+    setErrorMessage("");
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Save form data locally before redirect
-    localStorage.setItem("foxhuntFormData", JSON.stringify(formData));
+    if (!file) {
+      setErrorMessage("❌ Please upload the payment receipt.");
+      return;
+    }
 
-    // Redirect to Instamojo payment link (replace with your own link)
-    window.location.href = "https://imjo.in/9VmsQE";
+    let imageUrl = null;
+
+    try {
+      // Upload file to Supabase storage
+      const fileName = `${formData.teamName}_${Date.now()}_${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from("Foxhunt_files")
+        .upload(fileName, file);
+
+      if (uploadError) {
+        setErrorMessage("❌ File upload failed: " + uploadError.message);
+        return;
+      }
+
+      // Get public URL
+      const { data: publicUrlData } = supabase.storage
+        .from("Foxhunt_files")
+        .getPublicUrl(fileName);
+
+      imageUrl = publicUrlData.publicUrl;
+
+      // Insert form data into Supabase table
+      const { error } = await supabase.from("FoxHunt").insert([
+        {
+          Team: formData.teamName,
+          Leader: formData.leaderName,
+          LeaderE: formData.leaderEmail,
+          Mem1: formData.member1Name,
+          E1: formData.member1Email,
+          Mem2: formData.member2Name,
+          E2: formData.member2Email,
+          Mem3: formData.member3Name,
+          E3: formData.member3Email,
+          Phone: formData.phone,
+          Attendance: false,
+          image_url: imageUrl,
+        },
+      ]);
+
+      if (error) {
+        setErrorMessage("❌ Error submitting form: " + error.message);
+        console.log(error);
+      } else {
+        alert("✅ Registration successful!");
+        // Reset form
+        setFormData({
+          teamName: "",
+          leaderName: "",
+          leaderEmail: "",
+          member1Name: "",
+          member1Email: "",
+          member2Name: "",
+          member2Email: "",
+          member3Name: "",
+          member3Email: "",
+          phone: "",
+        });
+        setFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        setErrorMessage("");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("❌ Unexpected error: " + err.message);
+    }
   };
 
   return (
@@ -240,6 +312,34 @@ function Foxhunt() {
               />
             </div>
 
+            {/* QR Code */}
+            <div className="flex flex-col items-center mb-6">
+              <img
+                src="/images/payment_qr.png"
+                alt="Payment QR Code"
+                className="w-48 h-48 object-contain mb-4 border-2 border-cyan-400 rounded-lg shadow-lg"
+              />
+              <p className="text-gray-300 text-sm font-electrolize">
+                Scan the QR code to make the payment and upload the receipt below
+              </p>
+            </div>
+
+            {/* File Upload */}
+            <div className="mb-6">
+              <label className="block font-electrolize mb-2">
+                Upload Payment Receipt
+              </label>
+              <input
+                type="file"
+                name="paymentProof"
+                accept="image/*,application/pdf"
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                required
+              />
+            </div>
+
             {/* Error Message */}
             {errorMessage && (
               <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium">
@@ -252,7 +352,7 @@ function Foxhunt() {
               type="submit"
               className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-110 transition-transform duration-300"
             >
-              Proceed to Payment
+              Submit Registration
             </button>
           </form>
         </div>

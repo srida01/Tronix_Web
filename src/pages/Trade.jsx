@@ -1,7 +1,7 @@
-// src/pages/events/BallBalancer.jsx
+// src/pages/events/Trade.jsx
 import Galaxy from "../Components/Galaxy";
 import { Instagram, Linkedin, Menu, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,6 +14,8 @@ function Trade() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [file, setFile] = useState(null);
+  const fileInputRef = useRef(null);
 
   const navItems = [{ name: "Dashboard", path: "/dashboard" }];
 
@@ -22,7 +24,6 @@ function Trade() {
     navigate("/register");
   };
 
-  // Form state
   const [formData, setFormData] = useState({
     teamName: "",
     leaderName: "",
@@ -38,63 +39,81 @@ function Trade() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrorMessage(""); // Clear warning on change
+    setErrorMessage("");
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { error } = await supabase.from("Trade").insert([
-      {
-        Team: formData.teamName,
-        Leader: formData.leaderName,
-        LeaderE: formData.leaderEmail,
-        M1: formData.member1Name,
-        E1: formData.member1Email,
-        M2: formData.member2Name,
-        E2: formData.member2Email,
-        M3: formData.member3Name,
-        E3: formData.member3Email,
-        Phone: formData.phone,
-        Attendance: false,
-      },
-    ]);
+    if (!file) {
+      setErrorMessage("❌ Please upload the payment receipt.");
+      return;
+    }
 
-    if (error) {
-      if (error.message.includes("duplicate key value")) {
-        if (error.message.includes("BallBalancer_Team_key")) {
-          setErrorMessage("⚠️ This team name is already registered. Please choose a different name.");
-        } else if (
-          error.message.includes("BallBalancer_LeaderE_key") ||
-          error.message.includes("BallBalancer_E1_key") ||
-          error.message.includes("BallBalancer_E2_key") ||
-          error.message.includes("BallBalancer_E3_key")
-        ) {
-          setErrorMessage("⚠️ One of the emails you entered is already registered. Please use a different email.");
-        } else if (error.message.includes("BallBalancer_Phone_key")) {
-          setErrorMessage("⚠️ This phone number is already registered. Please use a different phone number.");
-        } else {
-          setErrorMessage("⚠️ Duplicate entry detected. Please check your input.");
-        }
-      } else {
-        setErrorMessage("❌ Error submitting form: " + error.message);
+    let imageUrl = null;
+
+    try {
+      const fileName = `${formData.teamName}_${Date.now()}_${file.name}`;
+      const { error: uploadError } = await supabase.storage
+        .from("Trade_files")
+        .upload(fileName, file);
+
+      if (uploadError) {
+        setErrorMessage("❌ File upload failed: " + uploadError.message);
+        return;
       }
-      console.log(error);
-    } else {
-      alert("✅ Registration successful!");
-      setFormData({
-        teamName: "",
-        leaderName: "",
-        leaderEmail: "",
-        member1Name: "",
-        member1Email: "",
-        member2Name: "",
-        member2Email: "",
-        member3Name: "",
-        member3Email: "",
-        phone: "",
-      });
-      setErrorMessage("");
+
+      const { data: publicUrlData } = supabase.storage
+        .from("BallBalancer_files")
+        .getPublicUrl(fileName);
+
+      imageUrl = publicUrlData.publicUrl;
+
+      const { error } = await supabase.from("Trade").insert([
+        {
+          Team: formData.teamName,
+          Leader: formData.leaderName,
+          LeaderE: formData.leaderEmail,
+          Mem1: formData.member1Name,
+          E1: formData.member1Email,
+          Mem2: formData.member2Name,
+          E2: formData.member2Email,
+          Mem3: formData.member3Name,
+          E3: formData.member3Email,
+          Phone: formData.phone,
+          Attendance: false,
+          image_url: imageUrl,
+        },
+      ]);
+
+      if (error) {
+        setErrorMessage("❌ Error submitting form: " + error.message);
+        console.log(error);
+      } else {
+        alert("✅ Registration successful!");
+        setFormData({
+          teamName: "",
+          leaderName: "",
+          leaderEmail: "",
+          member1Name: "",
+          member1Email: "",
+          member2Name: "",
+          member2Email: "",
+          member3Name: "",
+          member3Email: "",
+          phone: "",
+        });
+        setFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
+        setErrorMessage("");
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMessage("❌ Unexpected error: " + err.message);
     }
   };
 
@@ -114,7 +133,6 @@ function Trade() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-black/70 backdrop-blur-md z-50 shadow-md">
         <div className="container mx-auto flex justify-between items-center px-6 py-4">
-          {/* User Info */}
           <div className="flex items-center space-x-3">
             <img
               src={user?.profileImageUrl || logo}
@@ -126,7 +144,6 @@ function Trade() {
             </span>
           </div>
 
-          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <button
@@ -145,7 +162,6 @@ function Trade() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="lg:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="text-white">
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -153,7 +169,6 @@ function Trade() {
           </div>
         </div>
 
-        {/* Mobile Dropdown */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
@@ -189,6 +204,7 @@ function Trade() {
             </motion.div>
           )}
         </AnimatePresence>
+
       </nav>
 
       {/* Main Content */}
@@ -197,14 +213,12 @@ function Trade() {
           BallBalancer
         </h1>
 
-        {/* Registration Form */}
         <div className="bg-gradient-to-r from-purple-700/60 to-cyan-800/60 p-8 rounded-2xl shadow-lg w-full max-w-4xl mb-16">
           <h2 className="font-orbitron text-2xl font-semibold mb-6 text-center">
             Team Registration
           </h2>
 
           <form className="grid grid-cols-1 gap-6" onSubmit={handleSubmit}>
-            {/* Team Name */}
             <div>
               <label className="block font-electrolize mb-2">Team Name</label>
               <input
@@ -217,13 +231,10 @@ function Trade() {
               />
             </div>
 
-            {/* Members */}
-            {[1, 2, 3].map((num) => (
+            {[1,2,3].map((num) => (
               <div key={num} className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-electrolize mb-2">
-                    Member {num} Name
-                  </label>
+                  <label className="block font-electrolize mb-2">Member {num} Name</label>
                   <input
                     type="text"
                     name={`member${num}Name`}
@@ -234,9 +245,7 @@ function Trade() {
                   />
                 </div>
                 <div>
-                  <label className="block font-electrolize mb-2">
-                    Member {num} Email
-                  </label>
+                  <label className="block font-electrolize mb-2">Member {num} Email</label>
                   <input
                     type="email"
                     name={`member${num}Email`}
@@ -249,7 +258,6 @@ function Trade() {
               </div>
             ))}
 
-            {/* Leader */}
             <div>
               <label className="block font-electrolize mb-2">Leader Name</label>
               <input
@@ -272,12 +280,8 @@ function Trade() {
                 required
               />
             </div>
-
-            {/* Phone */}
             <div>
-              <label className="block font-electrolize mb-2">
-                Team Leader Phone Number
-              </label>
+              <label className="block font-electrolize mb-2">Team Leader Phone</label>
               <input
                 type="tel"
                 name="phone"
@@ -288,14 +292,32 @@ function Trade() {
               />
             </div>
 
-            {/* Error Message */}
+            {/* Payment QR + Upload */}
+            <div className="flex flex-col items-center mb-6">
+              <img
+                src="/ballbalancer_qr.png" // your QR image
+                alt="Payment QR Code"
+                className="w-48 h-48 object-contain mb-4 border-2 border-cyan-400 rounded-lg shadow-lg"
+              />
+              <p className="text-gray-300 text-sm font-electrolize">
+                Scan the QR code to make payment and upload receipt below
+              </p>
+              <input
+                type="file"
+                accept="image/*,application/pdf"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                className="w-full mt-3 px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                required
+              />
+            </div>
+
             {errorMessage && (
               <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium animate-pulse">
                 {errorMessage}
               </div>
             )}
 
-            {/* Submit */}
             <button
               type="submit"
               className="mt-6 bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 rounded-lg font-semibold shadow-md hover:scale-110 transition-transform duration-300"
@@ -310,9 +332,7 @@ function Trade() {
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           <div>
-            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
-              Contact Us
-            </h3>
+            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
               NITK Surathkal
               NH 66, Srinivasnagar
