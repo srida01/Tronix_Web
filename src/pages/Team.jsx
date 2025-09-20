@@ -3,64 +3,47 @@ import React from "react";
 import Galaxy from "../Components/Galaxy";
 import Navbar from "../Components/Navbar";
 import { Instagram, Linkedin } from "lucide-react";
-
+import con from "../images/con.jpg"
+import event1 from "../images/event1.jpg"
+import proj1 from "../images/proj1.jpeg"
+import proj2 from "../images/proj2.jpg"
+import media from "../images/media.jpeg"
 // Example team members
 const teamMembers = [
   {
-    name: "Alice Johnson",
-    designation: "President",
-    photo: "https://randomuseitspi//women/45.jpg",
-    instagram: "#",
-    linkedin: "#",
+    name: "Shreyas Aney",
+    designation: "Convener",
+    photo: con,
+    instagram: "https://www.instagram.com/aney_shreyas?igsh=MXIzcnBqZGcxaWVlNQ==",
+    linkedin: "https://www.linkedin.com/in/shreyasaney",
   },
   {
-    name: "Bob Smith",
-    designation: "Vice President",
-    photo: "https://randoits/men/46.jpg",
-    instagram: "#",
-    linkedin: "#",
+    name: "Ninad Srinivasa Rao",
+    designation: "Events & Projects Lead",
+    photo: event1,
+    instagram: "https://www.instagram.com/n1n4d_r4o?igsh=MTdmdWYwaDZ0anlsdg==",
+    linkedin: "https://www.linkedin.com/in/ninad-srinivasa-rao-744250337?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
   {
-    name: "Clara Lee",
-    designation: "Lead Designer",
-    photo: "https://randomusmen/47.jpg",
+    name: "Karthikeswar Nadh Mellacheruvu",
+    designation: "Project Lead",
+    photo: proj1,
     instagram: "#",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/karthikeswarnadh?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
   {
-    name: "David Kim",
-    designation: "Tech Head",
-    photo: "https://randomuser.me/api/popg",
+    name: "Debarghya Banerjee",
+    designation: "Project Lead",
+    photo: proj2,
     instagram: "#",
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/in/debarghya-banerjee-5b27671b7",
   },
   {
-    name: "Alice Johnson",
-    designation: "President",
-    photo: "https://randomuseitspi//women/45.jpg",
-    instagram: "#",
-    linkedin: "#",
-  },
-  {
-    name: "Bob Smith",
-    designation: "Vice President",
-    photo: "https://randoits/men/46.jpg",
-    instagram: "#",
-    linkedin: "#",
-  },
-  {
-    name: "Clara Lee",
-    designation: "Lead Designer",
-    photo: "https://randomusmen/47.jpg",
-    instagram: "#",
-    linkedin: "#",
-  },
-  {
-    name: "David Kim",
-    designation: "Tech Head",
-    photo: "https://randomuser.me/api/popg",
-    instagram: "#",
-    linkedin: "#",
+    name: "Sanjana Dalal",
+    designation: "Media Head",
+    photo: media,
+    instagram: "https://www.instagram.com/sanjana12_d?igsh=MTdoeXNmdTB6NGhxMg==",
+    linkedin: "https://www.linkedin.com/in/sanjana1204",
   },
 ];
 
@@ -90,7 +73,7 @@ function Team() {
 
       {/* Navbar */}
       <Navbar />
-
+      <br></br>
       {/* Team Section */}
       <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-16 md:py-20">
         <h1 className="font-orbitron text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 mb-12 text-center">
@@ -106,7 +89,7 @@ function Team() {
               <img
                 src={member.photo}
                 alt={member.name}
-                className="w-32 h-32 md:w-36 md:h-36 rounded-full border-4 border-white/30 mb-4"
+                className="w-105 h-50 md:w-36 md:h-36 rounded-full border-4 border-white/30 mb-4"
               />
               <h2 className="font-orbitron text-xl md:text-2xl font-semibold text-cyan-400">
                 {member.name}

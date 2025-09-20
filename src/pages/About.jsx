@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Galaxy from "../Components/Galaxy";
 import Navbar from "../Components/Navbar";
 import logo from "../images/Tronix_Logo.jpg";
@@ -22,7 +21,7 @@ function About() {
   }, []);
 
   return (
-    <div className="w-screen min-h-screen bg-black text-white relative">
+    <div className="bg-black rounded-[2.5rem] p-6 md:p-10">
       {/* Galaxy Background */}
       <Galaxy
         focal={[0.5, 0.5]}
@@ -41,7 +40,7 @@ function About() {
         autoCenterRepulsion={0}
         twinkleIntensity={0.6}
         transparent={true}
-        className="absolute top-0 left-0 w-full h-full"
+        className="fixed top-0 left-0 w-full h-full"
       />
 
       <Navbar />
@@ -49,36 +48,22 @@ function About() {
       {/* About Us Section */}
       <section className="relative z-10 min-h-screen flex flex-col md:flex-row items-center justify-center px-6 py-16 md:px-10 md:py-20 gap-10 md:gap-16">
         {/* Logo / Left Side */}
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="flex-shrink-0"
-        >
-          <motion.div
-            animate={{ rotate: [0, 360] }}
-            transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+        <div className="flex-shrink-0">
+          <div
             className="relative p-[3px] rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-400 
                        shadow-[0_0_40px_rgba(236,72,153,0.8)] 
                        animate-border-gradient"
           >
-            <motion.img
+            <img
               src={logo}
               alt="Logo"
               className="w-32 md:w-48 rounded-full border-4 border-transparent"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* About Us Box / Right Side */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
+        <div
           className="relative max-w-lg p-[2px] rounded-[2.5rem] bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 shadow-[0_0_50px_rgba(236,72,153,0.5)]"
         >
           <div className="bg-black/70 backdrop-blur-lg rounded-[2.5rem] p-6 md:p-10">
@@ -93,7 +78,7 @@ function About() {
               empower the next generation of innovators.
             </p>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Footer Section */}
@@ -137,7 +122,6 @@ function About() {
           © {new Date().getFullYear()} TRONIX. All Rights Reserved.
         </p>
       </footer>
-      
     </div>
   );
 }

@@ -68,7 +68,7 @@ function Trade() {
       }
 
       const { data: publicUrlData } = supabase.storage
-        .from("BallBalancer_files")
+        .from("Trade_files")
         .getPublicUrl(fileName);
 
       imageUrl = publicUrlData.publicUrl;
@@ -210,7 +210,7 @@ function Trade() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col items-center pt-32 px-6 z-10 relative">
         <h1 className="font-orbitron text-4xl font-bold mb-6 text-cyan-400">
-          BallBalancer
+          TradeOff
         </h1>
 
         <div className="bg-gradient-to-r from-purple-700/60 to-cyan-800/60 p-8 rounded-2xl shadow-lg w-full max-w-4xl mb-16">
