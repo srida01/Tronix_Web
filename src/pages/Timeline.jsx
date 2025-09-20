@@ -5,16 +5,14 @@ import Navbar from "../Components/Navbar";
 import { Instagram, Linkedin } from "lucide-react";
 
 const timelineEvents = [
-  { time: "08:00 AM", title: "Registration Opens", desc: "Participants check in and get their badges." },
-  { time: "09:00 AM", title: "Opening Ceremony", desc: "Kickoff event with welcome speech and schedule overview." },
-  { time: "10:00 AM", title: "Ball Balancer", desc: "Balance the ball using sensors and control systems." },
-  { time: "12:00 PM", title: "Hexapod", desc: "Watch and control the six-legged robot in action." },
-  { time: "02:00 PM", title: "Lights & Lasers", desc: "Fascinating laser experiments and light shows." },
-  { time: "03:30 PM", title: "Sign Language Detector", desc: "AI recognizes hand gestures in real time." },
-  { time: "05:00 PM", title: "Tradeoff Quiz", desc: "Team-based technical quiz and problem-solving." },
-  { time: "06:30 PM", title: "Automata Workshop", desc: "Hands-on session to build and simulate automata." },
-  { time: "08:00 PM", title: "Football CV", desc: "Computer vision applied to football tracking and analysis." },
-  { time: "09:30 PM", title: "Fox Hunt", desc: "Treasure hunt with riddles and tech clues." },
+  { time: "20-09-2025", title: "Registrations Opens", desc: "Participants check in and get their badges." },
+  { time: "25-09-2025", title: "Registrations Closes", desc: "Fascinating laser experiments and light shows." },
+  { time: "27-09-2025", title: "Fox Hunt Event", desc: "Team-based technical quiz and problem-solving." },
+  { time: "27-09-2025", title: "Sim2Real Hackthon", desc: "Hands-on session to build and simulate automata." },
+  { time: "28-09-2025", title: "Tradeoff", desc: "Computer vision applied to football tracking and analysis." },
+  { time: "28-09-2025", title: "Lights and Lasers", desc: "Treasure hunt with riddles and tech clues." },
+  { time: "28-09-2025", title: "Virtual Football", desc: "Treasure hunt with riddles and tech clues." },
+
 ];
 
 function Timeline(){

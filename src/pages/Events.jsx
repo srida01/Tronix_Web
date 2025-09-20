@@ -9,7 +9,7 @@ const events = [
     {
     title: "Fox Hunt",
     desc: "A fun treasure hunt with riddles and tech clues.",
-    time: "9:30 PM - 10:30 PM",
+    time: "27th September",
     venue: "Campus Area",
     img: "https://source.unsplash.com/400x250/?adventure,clues",
     link:" https://forms.gle/r78kvsaiw2tGo1vcA",

@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [buttonText, setButtonText] = useState(""); // For typing effect
+  const fullText = "Register Now";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,13 +68,11 @@ function Home() {
             className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 font-orbitron rounded-full font-semibold shadow-lg 
             hover:scale-105 hover:shadow-pink-500/50 transition-all duration-300 w-[200px]"
           >
-            Register Now
+            Register Now {/* Typing animation */}
           </button>
         </div>
-
       </div>
 
-      
       {/* Footer Section */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
@@ -90,35 +90,33 @@ function Home() {
           </div>
 
           {/* Social Links */}
-<div className="flex  gap-6">
-  <a
-    href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors"
-  >
-    <Instagram size={20} />
-    <span>@tronixnitk</span>
-  </a>
+          <div className="flex gap-6">
+            <a
+              href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors"
+            >
+              <Instagram size={20} />
+              <span>@tronixnitk</span>
+            </a>
 
-  <a
-    href="https://www.linkedin.com/company/tronix-nitk/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors"
-  >
-    <Linkedin size={20} />
-    <span>/Tronix NITK</span>
-  </a>
-</div>
-
-</div>
+            <a
+              href="https://www.linkedin.com/company/tronix-nitk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors"
+            >
+              <Linkedin size={20} />
+              <span>/Tronix NITK</span>
+            </a>
+          </div>
+        </div>
 
         <p className="text-gray-500 text-xs mt-6 font-electrolize">
           © {new Date().getFullYear()} TRONIX. All Rights Reserved.
         </p>
       </footer>
-      
     </div>
   );
 }
