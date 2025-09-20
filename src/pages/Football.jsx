@@ -321,33 +321,6 @@ function Football() {
               />
             </div>
 
-            {/* QR Code for Payment */}
-            <div className="flex flex-col items-center mb-6">
-              <img
-                src="/images/payment_qr.png"
-                alt="Payment QR Code"
-                className="w-48 h-48 object-contain mb-4 border-2 border-cyan-400 rounded-lg shadow-lg"
-              />
-              <p className="text-gray-300 text-sm font-electrolize">
-                Scan the QR code to make the payment and upload the receipt below
-              </p>
-            </div>
-
-            {/* File Upload */}
-            <div className="mb-6">
-              <label className="block font-electrolize mb-2">
-                Upload Payment Receipt
-              </label>
-              <input
-                type="file"
-                name="paymentProof"
-                accept="image/*,application/pdf"
-                onChange={handleFileChange}
-                ref={fileInputRef}
-                className="w-full px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                required
-              />
-            </div>
 
             {/* Error Message */}
             {errorMessage && (

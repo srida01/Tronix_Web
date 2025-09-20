@@ -292,25 +292,6 @@ function Trade() {
               />
             </div>
 
-            {/* Payment QR + Upload */}
-            <div className="flex flex-col items-center mb-6">
-              <img
-                src="/ballbalancer_qr.png" // your QR image
-                alt="Payment QR Code"
-                className="w-48 h-48 object-contain mb-4 border-2 border-cyan-400 rounded-lg shadow-lg"
-              />
-              <p className="text-gray-300 text-sm font-electrolize">
-                Scan the QR code to make payment and upload receipt below
-              </p>
-              <input
-                type="file"
-                accept="image/*,application/pdf"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                className="w-full mt-3 px-4 py-2 rounded-lg bg-black/40 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                required
-              />
-            </div>
 
             {errorMessage && (
               <div className="mb-4 text-red-400 bg-red-900/50 px-4 py-2 rounded-md text-center font-medium animate-pulse">
