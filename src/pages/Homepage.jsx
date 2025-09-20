@@ -72,7 +72,7 @@ function Home() {
 
       </div>
 
-
+      
       {/* Footer Section */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
@@ -112,7 +112,7 @@ function Home() {
   </a>
 </div>
 
-        </div>
+</div>
 
         <p className="text-gray-500 text-xs mt-6 font-electrolize">
           © {new Date().getFullYear()} TRONIX. All Rights Reserved.

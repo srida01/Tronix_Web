@@ -8,6 +8,9 @@ import event1 from "../images/events.jpeg"
 import proj1 from "../images/proj1.jpeg"
 import proj2 from "../images/proj2.jpeg"
 import media from "../images/media.jpeg"
+import invenhead from "../images/invenhead.jpeg"
+import web1 from "../images/web1.jpeg"
+import projectlead from "../images/projectlead.jpeg"
 // Example team members
 const teamMembers = [
   {
@@ -25,7 +28,14 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/ninad-srinivasa-rao-744250337?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
   {
-    name: "Karthikeswar Nadh Mellacheruvu",
+    name: "Aditya Sarma",
+    designation: "Inventory Head",
+    photo: invenhead,
+    instagram: "https://www.instagram.com/evas_1331?igsh=MTAyOWdmaDk3aHczag==",
+    linkedin: "https://www.linkedin.com/in/edara-aditya",
+  },
+  {
+    name: "Karthikeswar Nadh",
     designation: "Project Lead",
     photo: proj1,
     instagram: "#",
@@ -44,6 +54,20 @@ const teamMembers = [
     photo: media,
     instagram: "https://www.instagram.com/sanjana12_d?igsh=MTdoeXNmdTB6NGhxMg==",
     linkedin: "https://www.linkedin.com/in/sanjana1204",
+  },
+  {
+    name: "Sadhana Krishna Kotha",
+    designation: "Project Lead",
+    photo: projectlead,
+    instagram: "https://www.instagram.com/sadhanakrishnak?igsh=MWd4eXRtNmVvaXN2dg==",
+    linkedin: "https://www.linkedin.com/in/sadhanakrishnakotha",
+  },
+  {
+    name: "Prem Sai",
+    designation: "Web Team",
+    photo: web1,
+    instagram: "https://www.instagram.com/_prem.sai_?igsh=c202b2s1eDV3YXNh",
+    linkedin: "https://www.linkedin.com/in/prem-sai-85520a313?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
 ];
 

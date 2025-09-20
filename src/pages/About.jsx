@@ -44,16 +44,12 @@ function About() {
 
       <Navbar />
       <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
 
-<div className="w-full flex justify-center mt-12 md:mt-16">
-  <h1
-    className="font-orbitron text-6xl md:text-8xl font-extrabold tracking-widest 
-               text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500
-               drop-shadow-[0_0_35px_rgba(59,130,246,0.9)] "
-  >
-    About Tronix
-  </h1>
-</div>
+
 
       {/* About Us Section */}
       <section className="relative z-10 flex flex-col md:flex-row items-center justify-center px-6 py-10 md:px-10 md:py-12 gap-6 md:gap-10">
@@ -84,7 +80,7 @@ function About() {
         >
           <div className="bg-black/70 backdrop-blur-lg rounded-[2.5rem] p-6 md:p-10">
             <h2 className="font-orbitron text-3xl md:text-4xl font-bold mb-4 flowing-text text-center md:text-left">
-              
+              ABOUT TRONIX
             </h2>
             <p className="font-electrolize text-base md:text-lg leading-relaxed text-gray-200 text-center md:text-left">
               <span className="text-cyan-400 font-semibold">TRONIX</span> is a
@@ -96,7 +92,7 @@ function About() {
           </div>
         </div>
       </section>
-
+      <br></br><br></br><br></br>
       {/* Footer Section */}
       <footer className="relative z-10 w-full bg-black/70 backdrop-blur-lg border-t border-white/20 py-8 px-6 text-center md:text-left">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">

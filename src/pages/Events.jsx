@@ -160,6 +160,7 @@ function Events() {
               <Linkedin size={20} />
               <span>/Tronix NITK</span>
             </a>
+            
           </div>
         </div>
 
