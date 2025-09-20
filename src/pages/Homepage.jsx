@@ -4,12 +4,10 @@ import Galaxy from "../Components/Galaxy";
 import Navbar from "../Components/Navbar";
 import logo from "../images/Tronix_Logo.jpg";
 import { Instagram, Linkedin } from "lucide-react";
-import { useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
-  const { isSignedIn } = useUser();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -64,20 +62,12 @@ function Home() {
 
         <div className="flex flex-col md:flex-row gap-4">
           <button
-            onClick={() => navigate(isSignedIn ? "/dashboard" : "/register")}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg 
-            hover:scale-105 hover:shadow-pink-500/50 transition-all duration-300"
-          >
-            {isSignedIn ? "Go To Dashboard" : "Registration"}
-          </button>
-
-          {!isSignedIn && <button
             onClick={() => navigate("/events")}
-            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 rounded-full font-semibold shadow-lg 
-            hover:scale-105 hover:shadow-pink-500/50 transition-all duration-300"
+            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 font-orbitron rounded-full font-semibold shadow-lg 
+            hover:scale-105 hover:shadow-pink-500/50 transition-all duration-300 w-[200px]"
           >
-            Events
-          </button>}
+            Register Now
+          </button>
         </div>
 
       </div>
@@ -92,32 +82,36 @@ function Home() {
               Contact Us
             </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
-              NITK Surathkal
-              NH 66, Srinivasnagar
-              Surathkal, Mangalore
+              NITK Surathkal<br></br>
+              NH 66, Srinivasnagar<br></br>
+              Surathkal, Mangalore<br></br>
               Karnataka 575025
             </p>
           </div>
 
           {/* Social Links */}
-          <div className="flex space-x-6">
-            <a
-              href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
-            >
-              <Instagram size={20} />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/tronix-nitk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
-            >
-              <Linkedin size={20} />
-            </a>
-          </div>
+<div className="flex  gap-6">
+  <a
+    href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors"
+  >
+    <Instagram size={20} />
+    <span>@tronixnitk</span>
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/tronix-nitk/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors"
+  >
+    <Linkedin size={20} />
+    <span>/Tronix NITK</span>
+  </a>
+</div>
+
         </div>
 
         <p className="text-gray-500 text-xs mt-6 font-electrolize">

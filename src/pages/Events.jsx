@@ -6,19 +6,29 @@ import { useNavigate } from "react-router-dom";
 import { Instagram, Linkedin } from "lucide-react"; // icons
 
 const events = [
+    {
+    title: "Fox Hunt",
+    desc: "A fun treasure hunt with riddles and tech clues.",
+    time: "9:30 PM - 10:30 PM",
+    venue: "Campus Area",
+    img: "https://source.unsplash.com/400x250/?adventure,clues",
+    link:" https://forms.gle/r78kvsaiw2tGo1vcA",
+  },
   {
     title: "Lights and Lasers",
     desc: "Experience fascinating laser and light experiments with science.",
     time: "2:00 PM - 3:00 PM",
     venue: "Physics Block",
     img: "https://source.unsplash.com/400x250/?laser,lights",
+    link:" https://forms.gle/Ek4REzF8B8qwi7qx9",
   },
   {
     title: "Tradeoff",
     desc: "A fun technical quiz + problem solving event with surprises.",
-    time: "5:00 PM - 6:00 PM",
-    venue: "Seminar Hall 2",
+    time: "28th Sept, 1:30 PM - 4:30 PM",
+    venue: "Department of Electronic and Communitcation Engineering NITK ",
     img: "https://source.unsplash.com/400x250/?puzzle,team",
+    link:" https://forms.gle/NxjYgEtck1h4MYJQ7",
   },
   {
     title: "Football CV",
@@ -26,13 +36,7 @@ const events = [
     time: "8:00 PM - 9:00 PM",
     venue: "Ground + AI Lab",
     img: "https://source.unsplash.com/400x250/?football,ai",
-  },
-  {
-    title: "Fox Hunt",
-    desc: "A fun treasure hunt with riddles and tech clues.",
-    time: "9:30 PM - 10:30 PM",
-    venue: "Campus Area",
-    img: "https://source.unsplash.com/400x250/?adventure,clues",
+    link:"https://forms.gle/bQohMYxsLcYV1iLBA",
   },
 ];
 
@@ -68,7 +72,7 @@ function Events() {
       {/* Navbar */}
       <Navbar />
       <br />
-
+      <br />
       {/* Events Section */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
         {/* Centered Heading */}
@@ -96,23 +100,24 @@ function Events() {
                 className="w-full h-48 object-cover"
               />
               <div className="p-5 flex flex-col flex-grow">
-                <h2 className="text-2xl font-bold mb-2 text-cyan-300">
+                <h2 className="text-2xl font-orbitron font-bold mb-2 text-cyan-300">
                   {event.title}
                 </h2>
-                <p className="text-sm text-gray-300 mb-4 flex-grow">
+                <p className="text-sm font-orbitron text-gray-300 mb-4 flex-grow">
                   {event.desc}
                 </p>
                 <p className="text-sm">🕒 {event.time}</p>
                 <p className="text-sm mb-4">📍 {event.venue}</p>
 
                 {/* Registration Button */}
+                <a href={event.link} rel="noopener noreferrer" className="w-full">
                 <button
-                  onClick={() => navigate("/register")}
                   className="w-full font-electrolize bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold py-2 px-4 rounded-xl shadow-lg 
                              transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.7)]"
                 >
                   Register
                 </button>
+                </a>
               </div>
             </div>
           ))}
@@ -128,9 +133,9 @@ function Events() {
               Contact Us
             </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
-              NITK Surathkal
-              NH 66, Srinivasnagar
-              Surathkal, Mangalore
+              NITK Surathkal<br></br>
+              NH 66, Srinivasnagar<br></br>
+              Surathkal, Mangalore<br></br>
               Karnataka 575025
             </p>
           </div>
@@ -144,7 +149,7 @@ function Events() {
               className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
             >
               <Instagram size={20} />
-              <span className="font-electrolize"></span>
+              <span>@tronixnitk</span>
             </a>
             <a
               href="https://www.linkedin.com/company/tronix-nitk/"
@@ -153,7 +158,7 @@ function Events() {
               className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
             >
               <Linkedin size={20} />
-              <span className="font-electrolize"></span>
+              <span>/Tronix NITK</span>
             </a>
           </div>
         </div>

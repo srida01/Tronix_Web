@@ -47,6 +47,8 @@ function Timeline(){
       {/* Navbar */}
       <Navbar />
       <br />
+      <br />
+      <br />
 
       {/* Timeline Section */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-16">
@@ -55,24 +57,20 @@ function Timeline(){
         </h1>
 
         {/* Vertical Timeline */}
-        <div className="relative before:absolute before:top-0 before:bottom-0 before:left-1/2 before:w-[2px] before:bg-cyan-400/30 before:-translate-x-1/2">
-          {timelineEvents.map((event, idx) => {
-            const isLeft = idx % 2 === 0;
+        <div className="relative before:absolute before:top-0 before:bottom-0 before:left-1/2 before:w-[2px] before:bg-cyan-400  before:-translate-x-1/2">
+          {timelineEvents.map((event) => {
             return (
               <div
-                key={idx}
-                className={`mb-12 flex flex-col md:flex-row items-center w-full relative z-10 ${
-                  isLeft ? "md:justify-start" : "md:justify-end"
-                }`}
+                className={`mb-12 flex flex-col  lg:ml-[220px] md:flex-row items-center w-full relative z-10`}
               >
                 <div className="w-full md:w-1/2 px-0 md:px-6">
-                  <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-5 shadow-lg hover:shadow-[0_0_25px_rgba(0,255,255,0.6)] transition-all duration-300">
+                  <div className="bg-white/5 backdrop-blur-lg border border-white/20 rounded-2xl p-5 shadow-lg hover:shadow-[0_0_25px_rgba(0,255,255,0.6)] transition-all duration-300">
                     <p className="text-cyan-300 font-bold">{event.time}</p>
                     <h2 className="text-xl md:text-2xl font-bold mt-1 mb-2">{event.title}</h2>
                     <p className="text-gray-300 text-sm md:text-base">{event.desc}</p>
                   </div>
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 md:top-auto w-5 h-5 bg-cyan-400 rounded-full border-2 border-white/50 shadow-[0_0_10px_rgba(0,255,255,0.5)]" />
+               
               </div>
             );
           })}
@@ -85,34 +83,36 @@ function Timeline(){
           {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
-            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal
-              NH 66, Srinivasnagar
-              Surathkal, Mangalore
+            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal<br></br>
+              NH 66, Srinivasnagar<br></br>
+              Surathkal, Mangalore<br></br>
               Karnataka 575025
             </p>
           </div>
 
           {/* Social Links */}
-          <div className="flex space-x-6">
-            <a
-              href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
-            >
-              <Instagram size={20} />
-              <span className="font-electrolize"></span>
-            </a>
-            <a
-              href="https://www.linkedin.com/company/tronix-nitk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
-            >
-              <Linkedin size={20} />
-              <span className="font-electrolize"></span>
-            </a>
-          </div>
+<div className="flex  gap-6">
+  <a
+    href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors"
+  >
+    <Instagram size={20} />
+    <span>@tronixnitk</span>
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/tronix-nitk/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors"
+  >
+    <Linkedin size={20} />
+    <span>/Tronix NITK</span>
+  </a>
+</div>
+
         </div>
 
         {/* Copyright */}

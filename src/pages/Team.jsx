@@ -3,10 +3,10 @@ import React from "react";
 import Galaxy from "../Components/Galaxy";
 import Navbar from "../Components/Navbar";
 import { Instagram, Linkedin } from "lucide-react";
-import con from "../images/con.jpg"
-import event1 from "../images/event1.jpg"
+import con from "../images/con.jpeg"
+import event1 from "../images/events.jpeg"
 import proj1 from "../images/proj1.jpeg"
-import proj2 from "../images/proj2.jpg"
+import proj2 from "../images/proj2.jpeg"
 import media from "../images/media.jpeg"
 // Example team members
 const teamMembers = [
@@ -74,6 +74,8 @@ function Team() {
       {/* Navbar */}
       <Navbar />
       <br></br>
+      <br></br>
+
       {/* Team Section */}
       <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6 py-16 md:py-20">
         <h1 className="font-orbitron text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 mb-12 text-center">

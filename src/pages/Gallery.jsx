@@ -53,6 +53,8 @@ function Gallery() {
       {/* Navbar */}
       <Navbar />
       <br />
+      <br />
+
 
       {/* Gallery Section */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
@@ -83,33 +85,35 @@ function Gallery() {
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal
-              NH 66, Srinivasnagar
-              Surathkal, Mangalore
-              Karnataka 575025
+              NH 66, Srinivasnagar<br></br>
+              Surathkal, Mangalore<br></br>
+              Karnataka 575025<br></br>
             </p>
           </div>
 
           {/* Social Links */}
-          <div className="flex space-x-6">
-            <a
-              href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-pink-400 transition"
-            >
-              <Instagram size={20} />
-              <span className="font-electrolize"></span>
-            </a>
-            <a
-              href="https://www.linkedin.com/company/tronix-nitk/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-300 hover:text-cyan-400 transition"
-            >
-              <Linkedin size={20} />
-              <span className="font-electrolize"></span>
-            </a>
-          </div>
+          <div className="flex  gap-6">
+  <a
+    href="https://www.instagram.com/tronixnitk?igsh=ZGt6aHI5bXdoNHR6"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-gray-300 hover:text-pink-400 transition-colors"
+  >
+    <Instagram size={20} />
+    <span>@tronixnitk</span>
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/tronix-nitk/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-gray-300 hover:text-cyan-400 transition-colors"
+  >
+    <Linkedin size={20} />
+    <span>/Tronix NITK</span>
+  </a>
+</div>
+
         </div>
 
         {/* Copyright */}
