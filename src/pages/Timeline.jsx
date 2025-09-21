@@ -5,13 +5,13 @@ import Navbar from "../Components/Navbar";
 import { Instagram, Linkedin } from "lucide-react";
 
 const timelineEvents = [
-  { time: "20-09-2025", title: "Registrations Opens", desc: "Participants check in and get their badges." },
-  { time: "25-09-2025", title: "Registrations Closes", desc: "Fascinating laser experiments and light shows." },
-  { time: "27-09-2025", title: "Fox Hunt Event", desc: "Team-based technical quiz and problem-solving." },
+  { time: "21-09-2025", title: "Registrations Opens", desc: "Participants check in and get their badges." },
+  { time: "26-09-2025", title: "Registrations Closes", desc: "Fascinating laser experiments and light shows." },
+  { time: "27-09-2025", title: "Fox Hunt Event", desc: "Spot the fox – tarck it, hunt it, claim victory" },
   { time: "27-09-2025", title: "Sim2Real Hackthon", desc: "Hands-on session to build and simulate automata." },
-  { time: "28-09-2025", title: "Tradeoff", desc: "Computer vision applied to football tracking and analysis." },
-  { time: "28-09-2025", title: "Lights and Lasers", desc: "Treasure hunt with riddles and tech clues." },
-  { time: "28-09-2025", title: "Virtual Football", desc: "Treasure hunt with riddles and tech clues." },
+  { time: "28-09-2025", title: "Tradeoff", desc: "Push Your Limits: 3-Hour Hardware Hackathon to Test Your Circuit Skills!" },
+  { time: "27-09-2025", title: "Lights and Lasers", desc: "Dodge the Beams. Defy the Odds. Conquer the Maze!" },
+  // { time: "28-09-2025", title: "Virtual Football", desc: "Treasure hunt with riddles and tech clues." },
 
 ];
 
@@ -80,7 +80,7 @@ function Timeline(){
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           {/* Address */}
           <div>
-            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
+            <h3 className="font-orbitron text-lg font-semibold text-cyan-400"> <a href="mailto:tronix@nitk.edu.in">Contact Us</a></h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal<br></br>
               NH 66, Srinivasnagar<br></br>
               Surathkal, Mangalore<br></br>

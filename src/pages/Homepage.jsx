@@ -79,7 +79,7 @@ function Home() {
           {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
-              Contact Us
+              <a href="mailto:tronix@nitk.edu.in">Contact Us</a>
             </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
               NITK Surathkal<br></br>

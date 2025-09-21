@@ -33,6 +33,7 @@ function Navbar() {
               className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full border-2 border-transparent hover:scale-110 transition"
             />
           </div>
+          <h2 className="font-orbitron text-1xl md:text-2xl font-extrabold tracking-widest  ">Tronix Engineer</h2>
         </div>
 
         {/* Desktop Menu */}

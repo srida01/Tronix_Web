@@ -83,8 +83,11 @@ function Gallery() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           {/* Address */}
           <div>
-            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">Contact Us</h3>
-            <p className="font-electrolize text-gray-300 text-sm mt-1">NITK Surathkal
+            <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
+               <a href="mailto:tronix@nitk.edu.in">Contact Us</a>
+            </h3>
+            <p className="font-electrolize text-gray-300 text-sm mt-1">
+              NITK Surathkal
               NH 66, Srinivasnagar<br></br>
               Surathkal, Mangalore<br></br>
               Karnataka 575025<br></br>

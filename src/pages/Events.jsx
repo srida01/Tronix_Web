@@ -4,40 +4,42 @@ import Galaxy from "../Components/Galaxy";
 import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Instagram, Linkedin } from "lucide-react"; // icons
-
+import foxhunt from "../images/foxhunt.png";
+import trade from "../images/trade.png"
+import lights from "../images/lights.png"
 const events = [
     {
     title: "Fox Hunt",
-    desc: "A fun treasure hunt with riddles and tech clues.",
+    desc: "Spot the fox – tarck it, hunt it, claim victory",
     time: "27th September",
     venue: "Campus Area",
-    img: "https://source.unsplash.com/400x250/?adventure,clues",
+    img: foxhunt,
     link:" https://forms.gle/r78kvsaiw2tGo1vcA",
   },
   {
-    title: "Lights and Lasers",
-    desc: "Experience fascinating laser and light experiments with science.",
-    time: "2:00 PM - 3:00 PM",
-    venue: "Physics Block",
-    img: "https://source.unsplash.com/400x250/?laser,lights",
-    link:" https://forms.gle/Ek4REzF8B8qwi7qx9",
-  },
-  {
     title: "Tradeoff",
-    desc: "A fun technical quiz + problem solving event with surprises.",
+    desc: "Push Your Limits: 3-Hour Hardware Hackathon to Test Your Circuit Skills!",
     time: "28th Sept, 1:30 PM - 4:30 PM",
     venue: "Department of Electronic and Communitcation Engineering NITK ",
-    img: "https://source.unsplash.com/400x250/?puzzle,team",
+    img: trade,
     link:" https://forms.gle/NxjYgEtck1h4MYJQ7",
   },
   {
-    title: "Football CV",
-    desc: "Computer vision applied to football tracking and analysis.",
-    time: "8:00 PM - 9:00 PM",
-    venue: "Ground + AI Lab",
-    img: "https://source.unsplash.com/400x250/?football,ai",
-    link:"https://forms.gle/bQohMYxsLcYV1iLBA",
+    title: "Lights and Lasers",
+    desc: "Dodge the Beams. Defy the Odds. Conquer the Maze!",
+    time: "27th September - 28th September",
+    venue: "LHC-A",
+    img: lights,
+    link:" https://forms.gle/Ek4REzF8B8qwi7qx9",
   },
+  // {
+  //   title: "Football CV",
+  //   desc: "Computer vision applied to football tracking and analysis.",
+  //   time: "8:00 PM - 9:00 PM",
+  //   venue: "Ground + AI Lab",
+  //   img: "https://source.unsplash.com/400x250/?football,ai",
+  //   link:"https://forms.gle/bQohMYxsLcYV1iLBA",
+  // },
 ];
 
 function Events() {
@@ -130,7 +132,7 @@ function Events() {
           {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
-              Contact Us
+               <a href="mailto:tronix@nitk.edu.in">Contact Us</a>
             </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
               NITK Surathkal<br></br>
