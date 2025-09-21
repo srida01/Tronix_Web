@@ -11,6 +11,7 @@ import media from "../images/media.jpeg"
 import invenhead from "../images/invenhead.jpeg"
 import web1 from "../images/web1.jpeg"
 import projectlead from "../images/projectlead.jpeg"
+import logistics from "../images/logistics.jpeg"
 // Example team members
 const teamMembers = [
   {
@@ -33,6 +34,13 @@ const teamMembers = [
     photo: invenhead,
     instagram: "https://www.instagram.com/evas_1331?igsh=MTAyOWdmaDk3aHczag==",
     linkedin: "https://www.linkedin.com/in/edara-aditya",
+  },
+  {
+    name: "Saivarshith",
+    designation: "Logistics Head",
+    photo: logistics,
+    instagram: "https://www.instagram.com/saivarshithm?igsh=MTR4dXZxNmx3d3RqMw==",
+    linkedin: "https://www.linkedin.com/in/saivarshithmitukula?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   },
   {
     name: "Karthikeswar Nadh",
