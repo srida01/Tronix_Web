@@ -12,7 +12,10 @@ import invenhead from "../images/invenhead.jpeg"
 import web1 from "../images/web1.jpeg"
 import projectlead from "../images/projectlead.jpeg"
 import logistics from "../images/logistics.jpeg"
-// Example team members
+import web2 from "../images/web2.jpeg"
+import web3 from "../images/web3.jpeg"
+
+
 const teamMembers = [
   {
     name: "Shreyas Aney",
@@ -76,6 +79,20 @@ const teamMembers = [
     photo: web1,
     instagram: "https://www.instagram.com/_prem.sai_?igsh=c202b2s1eDV3YXNh",
     linkedin: "https://www.linkedin.com/in/prem-sai-85520a313?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+  },
+  {
+    name: "Srida",
+    designation: "Web Team",
+    photo: web2,
+    instagram: "#",
+    linkedin: "https://www.linkedin.com/in/narra-shanmukha-srida-53b73236a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+  },
+  {
+    name: "Vedant Bhargava",
+    designation: "Web Team",
+    photo: web3,
+    instagram: "https://www.instagram.com/bhargava_vedant?igsh=dmNrdzF6ZGhxNXBh",
+    linkedin: "https://www.linkedin.com/in/vedant-bhargava-a424a3206",
   },
 ];
 
