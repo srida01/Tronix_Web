@@ -4,7 +4,7 @@
 ---
 
 ## 📌 About  
-This is the official website of **Tronix**, the Electrical and Electronics Club of **NITK Surathkal**.  
+This is the official website of **Tronix**, the Electrical and Electronics Committe of **NITK Surathkal**.  
 It showcases our **events, projects, workshops**, and provides information about the **team**.  
 The website serves as a central hub for students and enthusiasts interested in **electronics, innovation, and technology at NITK**.
 
