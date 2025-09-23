@@ -14,6 +14,8 @@ import projectlead from "../images/projectlead.jpeg"
 import logistics from "../images/logistics.jpeg"
 import web2 from "../images/web2.jpeg"
 import web3 from "../images/web3.jpeg"
+import web4 from "../images/web4.jpeg"
+
 
 
 const teamMembers = [
@@ -94,6 +96,13 @@ const teamMembers = [
     instagram: "https://www.instagram.com/bhargava_vedant?igsh=dmNrdzF6ZGhxNXBh",
     linkedin: "https://www.linkedin.com/in/vedant-bhargava-a424a3206",
   },
+  {
+    name: "Kowndinya Vasudev ",
+    designation: "Web Team",
+    photo: web4,
+    instagram: "https://www.instagram.com/__kowndinya__?igsh=MWJyOGZrbzRjYWF5bg==",
+    linkedin: "https://www.linkedin.com/in/kowndinya-vasudev-230b75366?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+  },  
 ];
 
 function Team() {
