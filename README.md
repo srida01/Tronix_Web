@@ -1,4 +1,7 @@
-# Tronix NITK Website
+# Tronix NITK Website  
+
+
+---
 
 ## 📌 About  
 This is the official website of **Tronix**, the Electronics and Communication Club of **NITK Surathkal**.  
@@ -18,7 +21,7 @@ The website serves as a central hub for students and enthusiasts interested in *
 ---
 
 ## 🛠️ Tech Stack  
-- **Frontend:** HTML, CSS, JavaScript   
+- **Frontend:** [React](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/)  
 - **Deployment:** Hosted at [tronixnitk.in](http://tronixnitk.in)  
 - **Version Control:** Git + GitHub  
 
@@ -35,8 +38,8 @@ git clone https://github.com/TronixNITK/Tronix_Web.git
 # Enter project folder
 cd Tronix_Web
 
-# If dependencies are used
+# Install dependencies
 npm install
 
-# Start development server (example)
+# Start development server
 npm run dev
