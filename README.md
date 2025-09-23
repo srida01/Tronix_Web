@@ -18,7 +18,7 @@ The website serves as a central hub for students and enthusiasts interested in *
 ---
 
 ## 🛠️ Tech Stack  
-- **Frontend:** HTML, CSS, JavaScript *(update if React/Tailwind/Bootstrap is used)*  
+- **Frontend:** HTML, CSS, JavaScript   
 - **Deployment:** Hosted at [tronixnitk.in](http://tronixnitk.in)  
 - **Version Control:** Git + GitHub  
 
