@@ -5,16 +5,17 @@ import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router-dom";
 import { Instagram, Linkedin } from "lucide-react"; // icons
 import foxhunt from "../images/foxhunt.png";
-import trade from "../images/trade.png"
-import lights from "../images/lights.png"
+import trade from "../images/trade.png";
+import lights from "../images/lights.png";
+
 const events = [
-    {
+  {
     title: "Fox Hunt",
     desc: "Spot the fox – tarck it, hunt it, claim victory",
     time: "27th September",
     venue: "Campus Area",
     img: foxhunt,
-    link:" https://forms.gle/r78kvsaiw2tGo1vcA",
+    link: " https://forms.gle/r78kvsaiw2tGo1vcA",
   },
   {
     title: "Tradeoff",
@@ -22,24 +23,16 @@ const events = [
     time: "28th Sept, 1:30 PM - 4:30 PM",
     venue: "Department of Electronic and Communitcation Engineering NITK ",
     img: trade,
-    link:" https://forms.gle/NxjYgEtck1h4MYJQ7",
+    link: " https://forms.gle/NxjYgEtck1h4MYJQ7",
   },
   {
     title: "Lights and Lasers",
-    desc: "Dodge the Beams. Defy the Odds. Conquer the Maze!",
+    desc: "Dodge the Beams. Defy the Odds. Conquer the Maze!",
     time: "27th September - 28th September",
     venue: "LHC-A",
     img: lights,
-    link:" https://forms.gle/Ek4REzF8B8qwi7qx9",
+    link: " https://forms.gle/Ek4REzF8B8qwi7qx9",
   },
-  // {
-  //   title: "Football CV",
-  //   desc: "Computer vision applied to football tracking and analysis.",
-  //   time: "8:00 PM - 9:00 PM",
-  //   venue: "Ground + AI Lab",
-  //   img: "https://source.unsplash.com/400x250/?football,ai",
-  //   link:"https://forms.gle/bQohMYxsLcYV1iLBA",
-  // },
 ];
 
 function Events() {
@@ -112,14 +105,24 @@ function Events() {
                 <p className="text-sm mb-4">📍 {event.venue}</p>
 
                 {/* Registration Button */}
-                <a href={event.link} rel="noopener noreferrer" className="w-full">
-                <button
-                  className="w-full font-electrolize bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold py-2 px-4 rounded-xl shadow-lg 
-                             transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.7)]"
-                >
-                  Register
-                </button>
-                </a>
+                {event.title === "Tradeoff" ? (
+                  <button
+                    disabled
+                    className="w-full font-electrolize bg-red-600 text-white font-bold py-2 px-4 rounded-xl shadow-lg 
+                               transition-all duration-300 cursor-not-allowed"
+                  >
+                    Registrations Closed
+                  </button>
+                ) : (
+                  <a href={event.link} rel="noopener noreferrer" className="w-full">
+                    <button
+                      className="w-full font-electrolize bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold py-2 px-4 rounded-xl shadow-lg 
+                                 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(236,72,153,0.7)]"
+                    >
+                      Register
+                    </button>
+                  </a>
+                )}
               </div>
             </div>
           ))}
@@ -132,7 +135,7 @@ function Events() {
           {/* Address */}
           <div>
             <h3 className="font-orbitron text-lg font-semibold text-cyan-400">
-               <a href="mailto:tronix@nitk.edu.in">Contact Us</a>
+              <a href="mailto:tronix@nitk.edu.in">Contact Us</a>
             </h3>
             <p className="font-electrolize text-gray-300 text-sm mt-1">
               NITK Surathkal<br></br>
@@ -162,7 +165,6 @@ function Events() {
               <Linkedin size={20} />
               <span>/Tronix NITK</span>
             </a>
-            
           </div>
         </div>
 

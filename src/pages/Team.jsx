@@ -27,6 +27,13 @@ const teamMembers = [
     linkedin: "https://www.linkedin.com/in/shreyasaney",
   },
   {
+    name: "Vedant Bhargava",
+    designation: "Joint Convener",
+    photo: web3,
+    instagram: "https://www.instagram.com/bhargava_vedant?igsh=dmNrdzF6ZGhxNXBh",
+    linkedin: "https://www.linkedin.com/in/vedant-bhargava-a424a3206",
+  },
+  {
     name: "Ninad Srinivasa Rao",
     designation: "Events & Projects Lead",
     photo: event1,
@@ -88,13 +95,6 @@ const teamMembers = [
     photo: web2,
     instagram: "#",
     linkedin: "https://www.linkedin.com/in/narra-shanmukha-srida-53b73236a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-  },
-  {
-    name: "Vedant Bhargava",
-    designation: "Web Team",
-    photo: web3,
-    instagram: "https://www.instagram.com/bhargava_vedant?igsh=dmNrdzF6ZGhxNXBh",
-    linkedin: "https://www.linkedin.com/in/vedant-bhargava-a424a3206",
   },
   {
     name: "Kowndinya Vasudev ",
