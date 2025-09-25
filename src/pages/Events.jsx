@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Instagram, Linkedin } from "lucide-react"; // icons
 import foxhunt from "../images/foxhunt.png";
 import trade from "../images/trade.png";
-import lights from "../images/lights.png";
+import lights from "../images/Lights.png";
 
 const events = [
   {
