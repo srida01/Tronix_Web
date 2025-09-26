@@ -10,6 +10,14 @@ import lights from "../images/lights.png";
 
 const events = [
   {
+    title: "Lights and Lasers",
+    desc: "Dodge the Beams. Defy the Odds. Conquer the Maze!",
+    time: "27th September - 28th September",
+    venue: "LHC-A",
+    img: lights,
+    link: " https://forms.gle/Ek4REzF8B8qwi7qx9",
+  },
+  {
     title: "Fox Hunt",
     desc: "Spot the fox – tarck it, hunt it, claim victory",
     time: "27th September",
@@ -24,14 +32,6 @@ const events = [
     venue: "Department of Electronic and Communitcation Engineering NITK ",
     img: trade,
     link: " https://forms.gle/NxjYgEtck1h4MYJQ7",
-  },
-  {
-    title: "Lights and Lasers",
-    desc: "Dodge the Beams. Defy the Odds. Conquer the Maze!",
-    time: "27th September - 28th September",
-    venue: "LHC-A",
-    img: lights,
-    link: " https://forms.gle/Ek4REzF8B8qwi7qx9",
   },
 ];
 
@@ -105,7 +105,7 @@ function Events() {
                 <p className="text-sm mb-4">📍 {event.venue}</p>
 
                 {/* Registration Button */}
-                {event.title === "Tradeoff" ? (
+                {event.title === "Tradeoff" || event.title === "Fox Hunt" ? (
                   <button
                     disabled
                     className="w-full font-electrolize bg-red-600 text-white font-bold py-2 px-4 rounded-xl shadow-lg 
